@@ -8,7 +8,7 @@ public class Sistema {
 	public static void main(String[] args) {
 		// Criar Scanner para capturar dados
 		Scanner sc = new Scanner(System.in);
-		HandleMenu hm = new HandleMenu();
+		HandleMenu hm = new HandleMenu(sc);
 		int opcao = 0;
 		do {
 			// \n
@@ -50,6 +50,24 @@ public class Sistema {
 		} while (opcao != 9);
 		sc.close();
 
+	}
+
+	@SuppressWarnings("unused")
+	private static void trocarSenha() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@SuppressWarnings("unused")
+	private static int contarProdutos() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@SuppressWarnings("unused")
+	private static double calcularTotalPreco() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

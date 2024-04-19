@@ -2,55 +2,15 @@ package utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Produto;
 import models.Usuario;
-
 public class GerenciadorDeUsuarios {
-	private static final String NOME_ARQUIVO = "usuarios.txt";
-	
-	// Verificar a Existencia do nosso banco e criar caso nao exista
-	public void verificaECria(String nomeArquivo) {
-		// file => arquivo
-		File arquivo = new File(nomeArquivo);
-		// verificar se o arquivo existe
-		if(arquivo.exists()) {
-			System.out.println("Banco funcionando!");
-		} else {
-			// tente criar. caso de erro, exibe o erro
-			try {
-			// Criar o novo arquivo	
-			arquivo.createNewFile();
-			System.out.println("Arquivo criado com sucesso!");
-		} catch (IOException e) {
-			System.out.println("Ocorreu um erro ao criar o arquivo: " + e.getMessage());
-		}
-	  }
-   }
-
-
-
-
-   public void adicionarUsuario(Usuario usuario) {
-	   // Writer => Escrever
-	   // BuffereWriter , FileWriter
-	   // BufferedWriter, proporciona uma eficiente escrita
-	   // FileWriter, escreve dentro de arquivo+
-	   try(BufferedWriter bw = new BufferedWriter( new FileWriter(NOME_ARQUIVO, true))) {
-		   bw.write(usuario.toString()); // 1;arthur;12345
-		   bw.newLine(); // nova linha no arquivo txt
-		   System.out.println("Usuario adiconado com sucesso!");
-	   } catch (IOException e) {
-		   System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
-	   }
-     }
-   
+   private static final String NOME_ARQUIVO = null;
    public List<Usuario> lerUsuarios() {
 	   List<Usuario> usuarios = new ArrayList<Usuario>();
 	   // Buffed, File, Reader
@@ -68,6 +28,16 @@ public class GerenciadorDeUsuarios {
 	   return usuarios;
    }
    
+   public void adicionarUsuario(Usuario usuario) {
+       try (BufferedWriter bw = new BufferedWriter(new FileWriter(NOME_ARQUIVO, true))) {
+           bw.write(usuario.toString());
+           bw.newLine();
+           System.out.println("Usuário adicionado com sucesso!");
+       } catch (IOException e) {
+           System.out.println("Ocorreu um erro ao adicionar o usuário: " + e.getMessage());
+       }
+   }
+
    public void deletarUsuario(int id) {
 	   List<Usuario> usuarios = lerUsuarios();
 	   
@@ -133,27 +103,31 @@ public class GerenciadorDeUsuarios {
 	    		}
 	    	}
 	    }
-
-	    public static void main(String[] args) {
-	        Produto produto1 = new Produto(1, "Camiseta", 129.99, 10);
-	        Produto produto2 = new Produto(2, "Calça", 99.99, 5);
-
-	        System.out.println("Informações do Produto 1:");
-	        System.out.println("ID: " + produto1.getId());
-	        System.out.println("Nome: " + produto1.getNome());
-	        System.out.println("Preço: " + produto1.getPreco());
-	        System.out.println("Quantidade: " + produto1.getQuantidade());
-	        System.out.println("--------------------------");
-
-	        System.out.println("Informações do Produto 2:");
-	        System.out.println("ID: " + produto2.getId());
-	        System.out.println("Nome: " + produto2.getNome());
-	        System.out.println("Preço: " + produto2.getPreco());
-	        System.out.println("Quantidade: " + produto2.getQuantidade());
-	        System.out.println("--------------------------");
-
-	        produto1.setPreco(25.99);
-	        System.out.println("Novo preço da Camisa: " + produto1.getPreco());
+	    public void trocarSenha1(int id, String senhaAntiga, String novaSenha) {
+	        List<Usuario> usuarios = lerUsuarios();
+	        for (Usuario usuario : usuarios) {
+	            if (usuario.getId() == id && usuario.getSenha().equals(senhaAntiga)) {
+	                usuario.setSenha(novaSenha);
+	                reescreverArquivo(usuarios);
+	                System.out.println("Senha alterada com sucesso!");
+	                return;
+	            }
+	        }
+	        System.out.println("Usuário não encontrado ou senha antiga incorreta.");
 	    }
-	}
 
+		public void trocarSenha(int id, String senhaAntiga, String novaSenha) {
+			
+		}
+
+		public void verificaECria(String string) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		}
+	 
+
+
+ 
