@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Produto;
 import models.Usuario;
 
 public class GerenciadorDeUsuarios {
@@ -132,6 +133,27 @@ public class GerenciadorDeUsuarios {
 	    		}
 	    	}
 	    }
-   }
-	
+
+	    public static void main(String[] args) {
+	        Produto produto1 = new Produto(1, "Camiseta", 129.99, 10);
+	        Produto produto2 = new Produto(2, "Calça", 99.99, 5);
+
+	        System.out.println("Informações do Produto 1:");
+	        System.out.println("ID: " + produto1.getId());
+	        System.out.println("Nome: " + produto1.getNome());
+	        System.out.println("Preço: " + produto1.getPreco());
+	        System.out.println("Quantidade: " + produto1.getQuantidade());
+	        System.out.println("--------------------------");
+
+	        System.out.println("Informações do Produto 2:");
+	        System.out.println("ID: " + produto2.getId());
+	        System.out.println("Nome: " + produto2.getNome());
+	        System.out.println("Preço: " + produto2.getPreco());
+	        System.out.println("Quantidade: " + produto2.getQuantidade());
+	        System.out.println("--------------------------");
+
+	        produto1.setPreco(25.99);
+	        System.out.println("Novo preço da Camisa: " + produto1.getPreco());
+	    }
+	}
 
